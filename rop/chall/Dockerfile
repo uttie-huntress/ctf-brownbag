@@ -23,5 +23,7 @@ WORKDIR /challenge
 
 COPY babyrop.c .
 COPY Makefile .
+COPY exploit_aslr.py .
+COPY exploit.py .
 
 CMD ["/bin/bash"]
