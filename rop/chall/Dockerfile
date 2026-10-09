@@ -1,25 +1,27 @@
 FROM alpine:latest
 
-# Install build essential tools, debugger, binutils, and utilities
+# Install build tools, cmake, debugger, binutils, and Python build headers
 RUN apk add --no-cache \
     build-base \
+    cmake \
+    git \
+    linux-headers \
     binutils \
     gdb \
     bash \
     python3 \
     py3-pip \
+    python3-dev \
+    libffi-dev \
+    openssl-dev \
     strace
 
-# Set working directory
+# Install pwntools
+RUN pip install --no-cache-dir --break-system-packages pwntools
+
 WORKDIR /challenge
 
-# Copy the source file into the container
 COPY babyrop.c .
 COPY Makefile .
 
-# Compile the binary with all modern mitigations disabled
-# Note: musl-libc natively supports static linking
-RUN gcc -fno-pie -no-pie -Wno-implicit-function-declaration -fno-stack-protector babyrop.c -static -o babyrop
-
-# Set interactive bash as the default entry point
 CMD ["/bin/bash"]
