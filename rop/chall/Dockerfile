@@ -15,6 +15,7 @@ WORKDIR /challenge
 
 # Copy the source file into the container
 COPY babyrop.c .
+COPY Makefile .
 
 # Compile the binary with all modern mitigations disabled
 # Note: musl-libc natively supports static linking

@@ -6,5 +6,5 @@ build:
 dbuild:
 	docker build -t babyrop-chall .
 
-drun:
+dshell:
 	docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined babyrop-chall
